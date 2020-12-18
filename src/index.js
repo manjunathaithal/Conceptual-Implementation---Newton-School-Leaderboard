@@ -16,8 +16,8 @@ app.use(bodyParser.json());
 app.get("/topRankings", (req, res) => {
   const limit = req.query.limit;
   const offset = req.query.offset;
-  const limits = limit === undefined ? 20 : Number(limit);
-  const offsets = offset === undefined ? 0 : Number(offset);
+  const limits = limit === undefined || isNaN(limit) ? 20 : Number(limit);
+  const offsets = offset === undefined || isNaN(offset) ? 0 : Number(offset);
   console.log(offsets, limits);
   const value = data.data.slice(offsets, limits + offsets);
   res.send(value);
