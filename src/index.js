@@ -16,8 +16,9 @@ app.use(bodyParser.json());
 app.get("/topRankings", (req, res) => {
   const limit = req.query.limit;
   const offset = req.query.offset;
-  const limits = limit === undefined ? 20 : limit;
+  const limits = limit === undefined ? 20 : Number(limit) + 1;
   const offsets = offset === undefined ? 0 : offset;
+  console.log(offsets, limits);
   const value = data.data.slice(offsets, limits);
   res.send(value);
 });
